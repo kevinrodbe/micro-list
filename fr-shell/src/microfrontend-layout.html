@@ -1,0 +1,24 @@
+<single-spa-router>
+  <!-- Example layouts you might find helpful:
+  <nav>
+    <application name="@org/navbar"></application>
+  </nav>
+  <route path="settings">
+    <application name="@org/settings"></application>
+  </route>
+  -->
+
+  <main>
+    <route default>
+      <div>
+        <application name="@cande/fr-header"></application>
+        <div style="margin: 50px auto">
+          <application name="@cande/fr-category"></application>
+        </div>
+        <div style="margin: 0 auto 50px">
+          <application name="@cande/fr-list"></application>
+        </div>
+      </div>
+    </route>
+  </main>
+</single-spa-router>

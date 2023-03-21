@@ -1,0 +1,13 @@
+{
+  "extends": "ts-config-single-spa",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "src",
+    "target": "es2015",
+    "jsx": "react-jsx",
+    "declarationDir": "dist"
+  },
+  "files": ["src/cande-fr-list.tsx"],
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.test*"]
+}

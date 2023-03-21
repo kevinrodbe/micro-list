@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Root Config</title>
+    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500&display=swap" rel="stylesheet" />
+    <meta name="importmap-type" content="systemjs-importmap" />
+    <style>
+      * {
+        font-family: 'Nunito', sans-serif;
+        box-sizing: border-box;
+        font-weight: 300;
+      }
+      body {
+        margin: auto;
+      }
+      img {
+        width: 100%;
+      }
+      figure {
+        margin: auto;
+      }
+    </style>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+          "react": "https://unpkg.com/react@17.0.2/umd/react.production.min.js",
+          "react-dom": "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js",
+          "react-router-dom": "https://unpkg.com/react-router-dom@5.2.0/umd/react-router-dom.min.js",
+          "react-is": "https://unpkg.com/react-is/umd/react-is.production.min.js",
+          "styled-components": "https://unpkg.com/styled-components/dist/styled-components.min.js"
+        }
+      }
+    </script>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script" />
+
+    <!-- Add your organization's prod import map URL to this script's src  -->
+    <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+
+    <% if (isLocal) { %>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "@cande/root-config": "//localhost:9000/cande-root-config.js",
+          "@cande/fr-header": "//localhost:9001/cande-fr-header.js",
+          "@cande/fr-category": "//localhost:9002/cande-fr-category.js",
+          "@cande/fr-list": "//localhost:9003/cande-fr-list.js",
+          "@cande/utils": "//localhost:9004/cande-utils.js"
+        }
+      }
+    </script>
+    <% } %>
+
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+    <% if (isLocal) { %>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+    <% } else { %>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+    <% } %>
+  </head>
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <script>
+      System.import('@cande/root-config');
+    </script>
+    <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+  </body>
+</html>
