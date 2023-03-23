@@ -1,3 +1,4 @@
+import { LookupContextProvider } from 'context/LookupContext';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import styled from 'styled-components';
 
@@ -21,9 +22,11 @@ const queryClientConfig = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClientConfig}>
-      <Container>
-        <List />
-      </Container>
+      <LookupContextProvider>
+        <Container>
+          <List />
+        </Container>
+      </LookupContextProvider>
     </QueryClientProvider>
   );
 }

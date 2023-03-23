@@ -11,9 +11,9 @@ export const LookupContextProvider = ({ children }) => {
     return <>loading...</>;
   }
 
-  const { languages } = data;
+  const { movies } = data;
 
-  return <LookupContext.Provider value={{ languages }}>{children}</LookupContext.Provider>;
+  return <LookupContext.Provider value={{ movies }}>{children}</LookupContext.Provider>;
 };
 
 export const useLookupContext = () => {

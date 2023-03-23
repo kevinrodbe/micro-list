@@ -1,5 +1,7 @@
+import { HarryPotterResponse, RickAndMortiResponse } from './movie.types';
+
 export const rickAndMortiMap = {
-  toDomain: (res) => {
+  toDomain: (res): RickAndMortiResponse => {
     const { results, info } = res;
 
     return {
@@ -20,7 +22,7 @@ export const rickAndMortiMap = {
 };
 
 export const harryPotter = {
-  toDomain: (res) => {
+  toDomain: (res): HarryPotterResponse => {
     return {
       records: res.map((r) => ({
         gender: r.gender,

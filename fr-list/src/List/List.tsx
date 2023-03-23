@@ -1,75 +1,31 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import ContentLoader from 'react-content-loader';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 
 import { listenEvent, destroyEvent } from '@cande/utils';
+
 import { useFetchHarryPotter, useFetchRickAdnMorty } from 'domains/movie/services';
-
-const Card = styled.div`
-  border-radius: 20px;
-  border: 1px solid #cacaca;
-  border: 1px solid grey;
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 250px;
-  overflow: hidden;
-  width: 100%;
-`;
-
-const ImageBox = styled.figure`
-  display: flex;
-  margin-bottom: 15px;
-  margin-top: 0;
-  max-width: 250px;
-  width: 100%;
-`;
-
-const Img = styled.img`
-  height: 245px;
-  object-fit: cover;
-`;
-
-const Description = styled.div`
-  display: flex;
-  column-gap: 10px;
-  margin: 0 15px 15px;
-`;
-
-const Label = styled.p`
-  font-weight: 500;
-  margin: 0;
-`;
-
-const Text = styled.p`
-  font-weight: 100;
-  margin: 0;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-`;
+import { Container, Card, ImageBox, Img, Description, Label, Text } from './List.styles';
+import { useLookupContext } from 'context/LookupContext';
 
 const randomNumber = Math.floor(Math.random() * 5) + 3;
 
 export const List = () => {
   const { t, i18n } = useTranslation();
-  const [movieId, setMovieId] = useState('o1');
+  const { movies, languages } = useLookupContext();
+  const [movieId, setMovieId] = useState(movies.default);
   const [isLoading, setIsLoading] = useState(false);
   const { data: rickAndMortyResponse, isFetching: rickAndMortyLoading } = useFetchRickAdnMorty({
-    enabled: movieId === 'o1',
+    enabled: movieId === movies.m1.id,
   });
   const { data: harryPotterResponse, isFetching: harrryPotterLoading } = useFetchHarryPotter({
-    enabled: movieId === 'o2',
+    enabled: movieId === movies.m2.id,
   });
   const [data, setData] = useState<typeof harryPotterResponse>();
 
   useEffect(() => {
-    i18n.changeLanguage('es');
+    i18n.changeLanguage(languages.default);
     const onChangeLang = (event) => {
       changeLanguage(event.detail);
     };
@@ -87,15 +43,15 @@ export const List = () => {
   }, []);
 
   useEffect(() => {
-    if (movieId === 'o1') {
+    if (movieId === movies.m1.id) {
       setIsLoading(rickAndMortyLoading);
       setData(rickAndMortyResponse);
     }
-    if (movieId === 'o2') {
+    if (movieId === movies.m2.id) {
       setIsLoading(harrryPotterLoading);
       setData(harryPotterResponse);
     }
-  }, [rickAndMortyLoading, harrryPotterLoading]);
+  }, [movieId, rickAndMortyLoading, harrryPotterLoading]);
 
   if (isLoading) {
     return (

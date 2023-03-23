@@ -1,6 +1,6 @@
 import { QueryClientProvider, QueryClient } from 'react-query';
 
-import { Header } from './components/Header';
+import { Header } from './ui/Header';
 import { LookupContextProvider } from './context/LookupContext';
 
 const queryClientConfig = new QueryClient({

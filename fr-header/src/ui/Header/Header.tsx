@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { emitEvent } from '@cande/utils';
+
 import { Nav, Ul, A } from './Header.styles';
-import { useLookupContext } from '../../context/LookupContext';
+import { useLookupContext } from 'context/LookupContext';
 
 export const Header = () => {
   const [lang, setLang] = useState();

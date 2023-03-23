@@ -1,6 +1,9 @@
 {
   "extends": "ts-config-single-spa",
   "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "src",
+    "target": "es2015",
     "jsx": "react-jsx",
     "declarationDir": "dist"
   },
